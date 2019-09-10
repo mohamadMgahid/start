@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="styles.css" rel="stylesheet" />
+    <title>Filter on JavaScript</title>
+  </head>
+  <body>
+  	<div id="wrapper">
+	    <header>
+	    	<div id="page-banner">
+	    		<h1 class="title">Hotels</h1>
+				<form id="search-Hotels">
+					<input type="text" placeholder="Search Hotels..." />
+				</form>
+	    	</div>
+	    </header>
+	    <div id="Hotel-list">
+	    	<h2 class="title">Hotels Available</h2>
+	    	<ul>
+	    		<li>
+	    			<span class="name">Mirage</span>
+	    			<span class="delete">delete</span>
+	    		</li>
+	    		<li>
+	    			<span class="name">Hilton</span>
+	    			<span class="delete">delete</span>
+	    		</li>
+	    		<li>
+	    			<span class="name">Ritz Carlton</span>
+	    			<span class="delete">delete</span>
+	    		</li>
+	    		<li>
+	    			<span class="name">Kempenski</span>
+	    			<span class="delete">delete</span>
+	    		</li>
+	    	</ul>
+	    </div>
+	    <form id="add-Hotel">
+			<input type="checkbox" id="hide" />
+			<label for="hide">Hide all Hotels</label>
+	    	<input type="text" placeholder="Add a Hotel..." />
+	    	<button>Add</button>
+	    </form>
+
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

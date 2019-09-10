@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        <title>Game 2</title>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <style>
+            #app {
+                text-align: center;
+                font-family: sans-serif;
+            }
+            #problem {
+                font-size : 72px;
+            }
+            #winner{
+                font-size : 73px;
+                color: blue;
+            }
+            .incorrect {
+                color: red;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="app" />
+        <script type="text/babel">
+            class Winner extends React.Component {
+                render () {
+                    return (
+                        <div id="winner">
+                            you won {this.props.name}
+                        </div>
+                    )
+                }
+            }
+            class App extends React.Component {
+                state = {
+                        num1 : 1,
+                        num2 : 1,
+                        response: "" ,
+                        incorrect : false ,
+                        score: 0 ,
+                }
+
+                render() {
+                    if (this.state.score === 4 || this.state.score > 4) {
+                        return this.renderwin();
+                    }else {
+                        return this.renderProblem();
+                    }
+                }
+                
+                renderwin() {
+                    const name = "the addition game";
+                    return (
+                       < Winner name={name} />
+                    );
+                }
+
+                renderProblem() {
+                    return (
+                        <div>
+                            <div id="problem" className={this.state.incorrect ? "incorrect" : ""} >
+                                 {this.state.num1} + {this.state.num2}
+                            </div>
+                            <input onKeyPress={this.keypress} onChange = {this.updateResponse} value={this.state.response} />
+                            <div>
+                            Score: {this.state.score}
+                            </div>
+                            <button onClick={this.resetGame} >reset</button>
+                        </div>
+                    );
+
+                }
+
+                resetGame = (event) => {
+                    this.setState({
+                        num1 : 1,
+                        num2 : 1,
+                        response: "" ,
+                        incorrect : false ,
+                        score: 0 ,
+                    })
+                }
+                
+                updateResponse = (event) => {
+                    this.setState({ response: event.target.value });
+                }
+
+                keypress = (event) => {
+                    if (event.key === "Enter") {
+                        const answer = parseInt(this.state.response)
+                        if(answer === this.state.num1 + this.state.num2 ) {
+                            this.setState(state => ({
+                                num1 : Math.ceil(Math.random() * 10) + state.score,
+                                num2 : Math.ceil(Math.random() * 10) + state.score,
+                                response: "" ,
+                                incorrect: false ,
+                                score: this.state.score + 1 ,
+                            }));
+                        } else {
+                            this.setState({
+                                response : "" ,
+                                incorrect: true ,
+                            })
+                        }
+                    }
+                }
+            }
+
+
+            ReactDOM.render((
+                <div>
+                        <App />
+                        <App />
+                </div>
+            ), document.querySelector("#app"));
+        </script>
+    </body>
+</html>
